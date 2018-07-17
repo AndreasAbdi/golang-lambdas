@@ -22,9 +22,9 @@ var (
 	ErrNameNotProvided = errors.New("no name was provided in the HTTP body")
 )
 
-func altHandler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-
-	log.Printf("Processing Lambda request %n\n", request.RequestContext.RequestID)
+// AltHandler is some lambda call handler function
+func AltHandler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+	log.Printf("Processing Lambda request %q \n", request.RequestContext.RequestID)
 
 	if len(request.Body) < 1 {
 		return events.APIGatewayProxyResponse{}, ErrNameNotProvided
@@ -36,5 +36,5 @@ func altHandler(request events.APIGatewayProxyRequest) (events.APIGatewayProxyRe
 }
 
 func main() {
-	lambda.Start(altHandler)
+	lambda.Start(AltHandler)
 }
